@@ -1,0 +1,69 @@
+<head>
+    <title>Instacare Wait Times</title>
+</head>
+<body>
+ <div class ="container" id = "container">
+	<div class="left-div" id="Timetable">{{> InstacareTemp}}</div>	
+	<div class= "right-div">
+		<div class="map" id="maps">{{> mapTemp}}</div>
+		<div class = "appointmentForm" id="appForm">{{>appoForm}}</div>
+		<!--<div class = "mslider" >{{>dist_form}}</div>-->
+	</div>
+ </div>	
+</body>
+
+<template name="InstacareTemp">
+<table cellspacing='0'>  
+	<!-- Table Header -->	
+	<thead>
+		<tr>
+			<th>Instacare Name</th>
+			<th>Wait Time (mins)</th>						
+		</tr>
+	</thead>
+	<!-- Table Header -->
+	{{#each waitTimes}}
+	<!-- Table Body -->
+	<tbody>
+		<tr class="waitTimeRow">
+			<td>{{facilityName}}</td>
+			<td>{{currentWaitTimeInMinutes}}</td>			
+		</tr>
+	</tbody>
+	<!-- Table Body -->
+    {{/each}}	
+</table>
+</template>
+
+<template name="mapTemp">  
+      {{> googleMap name="map" options=mapOptions}}  
+</template>  
+
+<template name="appoForm">
+	{{#if showTheFormDiv}}
+		<form id="myform" class= "appoForm">
+			<h1>{{selectedInstacare}}<span>Wait Time: 35mins</span><span>Distance: 3.5miles</span></h1>
+			<label><span>First name: </span><input type="text" name="firstname"/></label>
+			<label><span>Last name:</span><input type="text" name="lastname"/></label>
+			<label><span>Reason for visit:</span><input type="text" name="reason"/></label>
+			<label><span>&nbsp;</span><input type="submit" id="submit"/></label>
+		</form>
+	{{/if}}	
+</template>
+
+<template name="dist_form">
+<!--<input class ="myslider" type="range" min="0" max="50" value="10" step="5"  />
+		onchange="showValue(this.value)"
+		<span id="range">10 miles</span>
+		<script type="text/javascript">
+		function showValue(newValue)
+		{
+			document.getElementById("range").innerHTML=newValue +" miles";
+		}
+		</script>-->
+		<form id="myform" class= "dist_form">
+			<label><span>Enter max distance: </span><input type="text" name="maxDist"/></label>
+			<label><span>&nbsp;</span><input type="submit" id="submit"/></label>
+		</form>
+		
+</template>
